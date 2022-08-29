@@ -1,0 +1,11 @@
+<div class="map-container">
+ 
+    <input class="form-control mr-sm-2" [formControl]="searchBar" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" (click)="searchLatLong()">Search</button>
+    <!-- <button class="btn btn-outline-success my-2 my-sm-0" onClick="window.location.reload();">Refresh Page</button> -->
+ 
+  <br>
+    <div class="map-frame">
+      <div id="map"></div>
+    </div>
+  </div>
