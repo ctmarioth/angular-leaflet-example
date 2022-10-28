@@ -1,6 +1,7 @@
 import { Component, AfterViewInit} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import * as L from 'leaflet';
+import Geocoder from 'leaflet-control-geocoder';
 
 @Component({
   selector: 'app-map',
@@ -13,6 +14,11 @@ export class MapComponent implements AfterViewInit {
   longitude!: number;
   searchBar = new FormControl('')
   err!: boolean;
+  searchRadio = new FormControl('addr')
+  locations: unknown;
+  isLoading!: boolean;
+  networkCemService: any;
+  marker: any;
 
   private initMap(): void {
     this.map = L.map('map', {
@@ -21,12 +27,16 @@ export class MapComponent implements AfterViewInit {
     });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 20,
+      maxZoom: 15,
       minZoom: 5,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
       tiles.addTo(this.map);
-
+      const GeocoderControl = new Geocoder();
+      GeocoderControl.addTo(this.map);
+      GeocoderControl.on('markgeocode', function (e) {
+      console.log(e)
+      })
       // const marker = L.marker([4.2105, 101.9758],{draggable: false})
       // .setIcon(
       //   L.icon({
@@ -77,9 +87,16 @@ export class MapComponent implements AfterViewInit {
      // });
    } else {
      this.err = true;
+     
    }
+
+   this.clearmapData();
  } 
+ clearmapData() {
+  if (this.marker.setLatLng) this.marker.clearLayers();
+}
  // showLocation(location: any) {
  //   console.log("show", location) 
  // }
+ 
 }

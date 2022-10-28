@@ -1,9 +1,27 @@
 <div class="map-container">
- 
-    <input class="form-control mr-sm-2" [formControl]="searchBar" type="search" placeholder="Search" aria-label="Search">
+  <!-- <mat-radio-group class="radio ml-2" [formControl]="searchRadio" (change)="searchBar.setValue('')">
+    <mat-radio-button class="radio-header" value="addr" >Address</mat-radio-button>
+    <mat-radio-button class="radio-header mr-0" value="lat-long">Lat-Long</mat-radio-button>
+</mat-radio-group> -->
+<div class="form-inline col-7" >
+    <input class="form-control mr-sm-2" [formControl]="searchBar" type="search" placeholder="Latitude, Longitude" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" (click)="searchLatLong()">Search</button>
+    <div></div>
+    </div>
     <!-- <button class="btn btn-outline-success my-2 my-sm-0" onClick="window.location.reload();">Refresh Page</button> -->
- 
+
+    <!-- <mat-form-field appearance="outline" class="search" [ngClass]="{'has-error': err === true}">
+      <input matInput 
+          [formControl]="searchBar" 
+          [matAutocomplete]="auto" 
+          [placeholder]="searchRadio.value === 'lat-long' ? 'Latitude, Longitude (e.g. 2.9307, 101.6589)' : ''"
+          (keyup.enter)="(searchRadio.value === 'lat-long') ? searchLatLong() : ''">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngIf="isLoading" class="search-opts">Loading...</mat-option>
+          <ng-container *ngIf="!isLoading">
+          </ng-container>
+      </mat-autocomplete>   
+  </mat-form-field> -->
   <br>
     <div class="map-frame">
       <div id="map"></div>
